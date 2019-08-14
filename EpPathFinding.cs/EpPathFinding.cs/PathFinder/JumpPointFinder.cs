@@ -178,6 +178,7 @@ namespace EpPathFinding.cs
         //public List<Node> openList;
         public IntervalHeap<Node> openList;
 
+        public int MaxIterations = 100000;
     }
     public class JumpPointFinder
     {
@@ -354,8 +355,9 @@ namespace EpPathFinding.cs
             currentSnapshot.stage = 0;
 
             stack.Push(currentSnapshot);
-            while (stack.Count != 0)
+            for (var i = 0; i < iParam.MaxIterations; i++)
             {
+                if (stack.Count == 0) break;
                 currentSnapshot = stack.Pop();
                 switch (currentSnapshot.stage)
                 {
